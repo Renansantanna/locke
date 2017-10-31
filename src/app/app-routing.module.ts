@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
-// import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { ListArticlesComponent } from './list-articles/list-articles.component';
 
 const routes: Routes = [  
   {
@@ -13,11 +13,11 @@ const routes: Routes = [
   {
     path: 'view/:article',
     component: ViewArticleComponent
-  },/*
+  },
   {
-    path: 'articles/:queryBy/:param',
+    path: 'articles',
     component: ListArticlesComponent
-  },*/
+  },
   {
   	path: '**',
   	redirectTo: 'editor',

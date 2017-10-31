@@ -7,7 +7,12 @@
       </div>
       <div class="form-group">
         <label for="subject">Assunto/Tema</label>
-        <input class="form-control"  name="subject" type="text" [(ngModel)]="subject">
+        <select [(ngModel)]="selected">
+          <option *ngFor="let subject of subjects" [value]="subject.id">
+            {{subject.name}}
+          </option>
+        </select>
+        <!--<input class="form-control"  name="subject" type="text" [(ngModel)]="subject">-->
       </div>
     </div>
   </div>

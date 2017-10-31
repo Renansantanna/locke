@@ -12,15 +12,16 @@ export class ArticleEditorComponent implements OnInit {
 
   public editor;
   title;
-  subject;
+  subjects;
   email = "aaa@bbb.com";
+  selected;
 
   public editorContent = ``;
   public editorOptions = {
     placeholder: "Crie..."
   };
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   onEditorBlured(quill) {
     console.log('editor blur!', quill);
@@ -39,19 +40,26 @@ export class ArticleEditorComponent implements OnInit {
     console.log('quill content is changed!', quill, html, text);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.http.get(environment.locke.url + environment.locke.categories)
+      .map((response) => response.json())
+      .subscribe((response) => {
+        console.log(response);
+        this.subjects = response;
+      });
+  }
 
   sendPost() {
     const post: Post = {
       title: this.title,
-      subject: this.subject,
+      subject: this.selected,
       content: this.editorContent,
       email: this.email
     }
     this.http.post(environment.locke.url + environment.locke.sendpost, post)
-    .subscribe((response) => {
-      console.log(response);
-    });
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
 }

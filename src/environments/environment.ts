@@ -7,7 +7,9 @@ export const environment = {
   production: false,
   locke: {
     url: 'http://localhost:8080',
-    sendpost: '/post/',
-    getOne: '/post/'
+    sendpost: '/post',
+    getOne: '/post/',
+    getAll: '/post/all',
+    categories: '/categories'
   }
 };
