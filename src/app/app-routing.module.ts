@@ -4,8 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { ViewArticleComponent } from './view-article/view-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { CallbackComponent } from './callback/callback.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [  
+  {
+    path: `home`,
+    component: HomeComponent
+  },
   {
     path: 'editor',
     component: ArticleEditorComponent
@@ -19,13 +25,17 @@ const routes: Routes = [
     component: ListArticlesComponent
   },
   {
+    path: 'callback',
+    component: CallbackComponent
+  },
+  {
   	path: '**',
-  	redirectTo: 'editor',
+  	redirectTo: 'home',
  		pathMatch: 'full'
   },
   {
   	path: '',
-  	redirectTo: 'editor',
+  	redirectTo: 'home',
  		pathMatch: 'full'
   }
 ];
