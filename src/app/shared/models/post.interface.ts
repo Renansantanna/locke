@@ -4,4 +4,5 @@ export interface Post {
     subject: string;
     content: string;
     email: string;
+    subjectValue: any;
 }

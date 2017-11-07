@@ -24,7 +24,7 @@ export class ViewArticleComponent implements OnInit {
       .map((response) => response.json())
       .subscribe((response) => {
         console.log(response);
-        this.content = (<Post>response.post[0]).content;
+        this.content = (<Post>response[0]).content;
       })
     });
   }

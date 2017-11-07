@@ -46,13 +46,16 @@ export class ArticleEditorComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         this.subjects = response;
+        this.selected = 0;
       });
   }
 
   sendPost() {
+    console.log(this.selected)
     const post: Post = {
       title: this.title,
-      subject: this.selected,
+      subject: this.subjects[this.selected].id,
+      subjectValue: this.subjects[this.selected].name,
       content: this.editorContent,
       email: this.email
     }

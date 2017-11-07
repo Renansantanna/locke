@@ -20,7 +20,7 @@ export class ListArticlesComponent implements OnInit {
       .map((response) => response.json())
       .subscribe((response) => {
         console.log(response);
-        this.postsList = (<Post[]>response.post);
+        this.postsList = (<Post[]>response);
       })
   }
 
