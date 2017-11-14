@@ -15,7 +15,7 @@ export class ArticleEditorComponent implements OnInit {
   title;
   subjects;
   uid = "aaabbbcom";
-  selected = 0;
+  selected = -1;
 
   public editorContent = ``;
   public editorOptions = {
@@ -24,24 +24,12 @@ export class ArticleEditorComponent implements OnInit {
 
   activatedRouteSubscription;
   postId;
-
-  constructor(private activatedRoute: ActivatedRoute, private http: Http) {
-    
-    this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-
-      this.postId = params['article'];
-
-      this.activatedRouteSubscription = this.http.get(environment.locke.url + environment.locke.getOne + this.postId)
-        .map((response) => response.json())
-        .subscribe((response) => {
-          console.log(response);
-          this.title = (<Post>response[0]).title;
-          this.subjects = (<Post>response[0]).subjectValue;
-        //  this.title = (<Post>response[0]).title;
-          this.editorContent = (<Post>response[0]).content;
-        })
-    });
-
+  isUpdate = false;
+  constructor(private activatedRoute: ActivatedRoute, private http: Http, private router: Router) {
+    this.uid = JSON.parse(localStorage.getItem('user')).user_id;
+    if (!this.uid) {
+      this.router.navigate(['/home']);
+    }
   }
 
   onEditorBlured(quill) {
@@ -68,22 +56,50 @@ export class ArticleEditorComponent implements OnInit {
         console.log(response);
         this.subjects = response;
         this.selected = 0;
+
+        this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+
+          this.postId = params['article'];
+          if (this.postId) {
+            this.activatedRouteSubscription = this.http.get(environment.locke.url + environment.locke.getMyPosts + '/' + this.uid + '/post/' + this.postId)
+              .map((response) => response.json())
+              .subscribe((response) => {
+                console.log(response);
+                if (response.length > 0) {
+                  this.title = (<Post>response[0]).title;
+                  this.editorContent = (<Post>response[0]).content;
+                  this.selected = this.subjects.findIndex(i => i.id === ((<Post>response[0]).subject));
+                  this.isUpdate = true;
+                } else {
+                  this.router.navigate(['/home']);
+                }
+              });
+          }
+        });
       });
   }
 
   sendPost() {
-    console.log(this.selected)
+    console.log(this.selected);
     const post: Post = {
       title: this.title,
       subject: this.subjects[this.selected].id,
       subjectValue: this.subjects[this.selected].name,
       content: this.editorContent,
       uid: this.uid
+    };
+
+    if (this.isUpdate) {
+      this.http.post(environment.locke.url + environment.locke.updatePost + this.postId, post)
+        .subscribe((response) => {
+          console.log(response);
+        });
+    } else {
+      this.http.post(environment.locke.url + environment.locke.sendpost, post)
+        .subscribe((response) => {
+          console.log(response);
+        });
     }
-    this.http.post(environment.locke.url + environment.locke.sendpost, post)
-      .subscribe((response) => {
-        console.log(response);
-      });
   }
 
 }

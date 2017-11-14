@@ -11,6 +11,7 @@ export const environment = {
     getOne: '/post/',
     getAll: '/post/all',
     categories: '/categories',
-    getMyPosts: '/user-posts'
+    getMyPosts: '/user-posts',
+    updatePost: '/update-post/'
   }
 };

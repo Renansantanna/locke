@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit {
   postsList;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: Http, private auth0: AuthService) {
+    
     let uid = JSON.parse(localStorage.getItem('user')).user_id;
     if (uid) {
       this.activatedRouteSubscription = this.http.get(environment.locke.url + environment.locke.getMyPosts + '/' + uid)
