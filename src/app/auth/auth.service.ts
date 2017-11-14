@@ -26,6 +26,18 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
+
+        
+        this.auth0.client.userInfo(authResult.accessToken, function (err, user) {
+          console.log(user);
+          let auth0Management = new auth0.Management({
+            domain: "locke.auth0.com",
+            token: authResult.idToken
+          });
+          auth0Management.getUser(user.sub, function (err, succ) {
+            localStorage.setItem(`user`, JSON.stringify(succ));            
+          });
+        });
         this.router.navigate(['/home']);
       } else if (err) {
         this.router.navigate(['/home']);
@@ -47,6 +59,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.clear();
     // Go back to the home route
     this.router.navigate(['/home']);
   }

@@ -16,6 +16,7 @@ import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { CallbackComponent } from './callback/callback.component';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './home/home.component';
     ViewArticleComponent,
     ListArticlesComponent,
     CallbackComponent,
-    HomeComponent
+    HomeComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

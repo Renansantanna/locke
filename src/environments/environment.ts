@@ -10,6 +10,7 @@ export const environment = {
     sendpost: '/post',
     getOne: '/post/',
     getAll: '/post/all',
-    categories: '/categories'
+    categories: '/categories',
+    getMyPosts: '/user-posts'
   }
 };

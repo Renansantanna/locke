@@ -3,6 +3,6 @@ export interface Post {
     title: string;
     subject: string;
     content: string;
-    email: string;
+    uid: string;
     subjectValue: any;
 }

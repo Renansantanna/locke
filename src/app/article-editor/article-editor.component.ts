@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { Post } from '../shared/models/post.interface';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-article-editor',
@@ -13,15 +14,35 @@ export class ArticleEditorComponent implements OnInit {
   public editor;
   title;
   subjects;
-  email = "aaa@bbb.com";
-  selected;
+  uid = "aaabbbcom";
+  selected = 0;
 
   public editorContent = ``;
   public editorOptions = {
     placeholder: "Crie..."
   };
 
-  constructor(private http: Http) { }
+  activatedRouteSubscription;
+  postId;
+
+  constructor(private activatedRoute: ActivatedRoute, private http: Http) {
+    
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+
+      this.postId = params['article'];
+
+      this.activatedRouteSubscription = this.http.get(environment.locke.url + environment.locke.getOne + this.postId)
+        .map((response) => response.json())
+        .subscribe((response) => {
+          console.log(response);
+          this.title = (<Post>response[0]).title;
+          this.subjects = (<Post>response[0]).subjectValue;
+        //  this.title = (<Post>response[0]).title;
+          this.editorContent = (<Post>response[0]).content;
+        })
+    });
+
+  }
 
   onEditorBlured(quill) {
     console.log('editor blur!', quill);
@@ -57,7 +78,7 @@ export class ArticleEditorComponent implements OnInit {
       subject: this.subjects[this.selected].id,
       subjectValue: this.subjects[this.selected].name,
       content: this.editorContent,
-      email: this.email
+      uid: this.uid
     }
     this.http.post(environment.locke.url + environment.locke.sendpost, post)
       .subscribe((response) => {

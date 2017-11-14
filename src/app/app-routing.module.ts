@@ -6,6 +6,8 @@ import { ViewArticleComponent } from './view-article/view-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { CallbackComponent } from './callback/callback.component';
 import { HomeComponent } from './home/home.component';
+import { AccountComponent } from './account/account.component';
+import { MustBeLoggedInGuard } from './guards/must-be-logged-in/must-be-logged-in.guard';
 
 const routes: Routes = [  
   {
@@ -14,19 +16,32 @@ const routes: Routes = [
   },
   {
     path: 'editor',
-    component: ArticleEditorComponent
+    component: ArticleEditorComponent,
+    canActivate: [MustBeLoggedInGuard]
+  },
+  {
+    path: 'editor/:article',
+    component: ArticleEditorComponent,
+    canActivate: [MustBeLoggedInGuard]
   },
   {
     path: 'view/:article',
-    component: ViewArticleComponent
+    component: ViewArticleComponent,
+    canActivate: [MustBeLoggedInGuard]
   },
   {
     path: 'articles',
-    component: ListArticlesComponent
+    component: ListArticlesComponent,
+    canActivate: [MustBeLoggedInGuard]
   },
   {
     path: 'callback',
     component: CallbackComponent
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [MustBeLoggedInGuard]
   },
   {
   	path: '**',
@@ -42,6 +57,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [MustBeLoggedInGuard]
 })
 export class AppRoutingModule { }

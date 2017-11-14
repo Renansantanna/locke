@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Auth0 - Angular</a>
+            <a class="navbar-brand" href="#">Locke</a>
 
             <button class="btn btn-primary btn-margin" routerLink="/">
             Home
@@ -15,6 +15,9 @@
             Log Out
         </button>
 
+        <button class="btn btn-primary btn-margin" *ngIf="auth.isAuthenticated()" (click)="goToMyPerfil()">
+            Minha Conta
+        </button>
         </div>
     </div>
 </nav>
