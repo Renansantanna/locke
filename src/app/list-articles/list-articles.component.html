@@ -1,5 +1,8 @@
-<div class="container l-container" style="padding-top: 100px;"><ul>
-  <li *ngFor="let post of postsList">
-    <a href="view/{{post.id}}">{{post.title}} - {{post.subjectValue}}</a>
-  </li>
-</ul></div>
+<div class="container l-container" style="padding-top: 100px;">
+  <div class="card" *ngFor="let post of postsList">
+    <div class="container-card">
+        <avatar [email]="post.subjectValue" size="60" background="#353b41" [displayType]="'circle'"></avatar>
+      <p><a href="view/{{post.id}}">{{post.title}} - {{post.subjectValue}}</a></p>
+    </div>
+  </div>
+</div>

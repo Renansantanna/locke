@@ -17,6 +17,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
+import { AvatarModule } from "ng2-avatar";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AccountComponent } from './account/account.component';
     QuillEditorModule,
     FormsModule,
     Ng2BootstrapModule.forRoot(),
-    HttpModule
+    HttpModule,
+    AvatarModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
