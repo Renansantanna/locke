@@ -1,6 +1,6 @@
-<div id="form-container" class="container">
+<div class="container l-container" style="padding-top: 100px;">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col">
       <div class="form-group">
         <label for="title">Título do artigo</label>
         <input class="form-control" name="title" type="text" [(ngModel)]="title">
@@ -17,18 +17,14 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12" id="editor-container">
-      <quill-editor [(ngModel)]="editorContent"
-            [options]="editorOptions"
-            (blur)="onEditorBlured($event)"
-            (focus)="onEditorFocused($event)"
-            (ready)="onEditorCreated($event)"
-            (change)="onContentChanged($event)"></quill-editor>
+    <div class="col" id="editor-container">
+      <quill-editor id="editor-container" [style]="{background: '#fff'}" [(ngModel)]="editorContent" [options]="editorOptions" (blur)="onEditorBlured($event)"
+        (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)"></quill-editor>
     </div>
   </div>
   <div class="row" style="position:absolute;bottom: 0px;">
     <a class="btn btn-primary" (click)="sendPost()">POSTAR</a>
   </div>
-</div> 
+</div>
 
 <!--<div [innerHTML]="content"></div> -->

@@ -19,16 +19,20 @@ export class ArticleEditorComponent implements OnInit {
 
   public editorContent = ``;
   public editorOptions = {
-    placeholder: "Crie..."
+    placeholder: "Crie...",
+    theme:  'snow'
   };
 
   activatedRouteSubscription;
   postId;
   isUpdate = false;
   constructor(private activatedRoute: ActivatedRoute, private http: Http, private router: Router) {
-    this.uid = JSON.parse(localStorage.getItem('user')).user_id;
-    if (!this.uid) {
-      this.router.navigate(['/home']);
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.uid = user.user_id;
+      if (!this.uid) {
+        this.router.navigate(['/home']);
+      }
     }
   }
 

@@ -38,7 +38,7 @@ export class AuthService {
             localStorage.setItem(`user`, JSON.stringify(succ));            
           });
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/editor']);
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
