@@ -1,4 +1,13 @@
-<div class="container l-container row justify-content-center" style="padding-top: 100px;">
+<div class="form-group"  style="margin-top: 100px;">
+  <label for="subject">Assunto/Tema</label>
+  <select class="form-control" [(ngModel)]="selected" (change)="search($event.target.value)">
+    <option *ngFor="let subject of subjects; let i = index" [value]="i">
+      {{subject.name}}
+    </option>
+  </select>
+</div>
+
+<div class="container l-container row justify-content-center">
   <div class="card" *ngFor="let post of postsList">
     <div class="container-card">
         <avatar [email]="post.subjectValue" size="60" [background]="post.color || '#353b41'" [displayType]="'circle'"></avatar>

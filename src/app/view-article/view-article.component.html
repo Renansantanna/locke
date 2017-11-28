@@ -1,1 +1,8 @@
-<div class="container" [innerHTML]="content" style="padding-top: 100px;"></div>
+<!--<div class="container" [innerHTML]="content" style="padding-top: 100px;"></div>-->
+<div class="container l-container" style="padding-top: 100px;">
+    <div class="column">
+      <div class="col" id="editor-container">
+        <quill-editor id="editor-container" [style]="{background: '#fff'}" [ngModel]="content" [options]="editorOptions"></quill-editor>
+      </div>
+    </div>
+  </div>

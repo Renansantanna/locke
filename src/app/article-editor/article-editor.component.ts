@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { Post } from '../shared/models/post.interface';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article-editor',
@@ -14,19 +16,21 @@ export class ArticleEditorComponent implements OnInit {
   public editor;
   title;
   subjects;
-  uid = "aaabbbcom";
+  uid;
   selected = -1;
 
   public editorContent = ``;
   public editorOptions = {
     placeholder: "Crie...",
-    theme:  'snow'
+    theme: 'snow'
   };
+
+  modal: any = {};
 
   activatedRouteSubscription;
   postId;
   isUpdate = false;
-  constructor(private activatedRoute: ActivatedRoute, private http: Http, private router: Router) {
+  constructor(private screenTitle: Title, private modalService: NgbModal, private activatedRoute: ActivatedRoute, private http: Http, private router: Router) {
     let user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.uid = user.user_id;
@@ -71,6 +75,7 @@ export class ArticleEditorComponent implements OnInit {
                 console.log(response);
                 if (response.length > 0) {
                   this.title = (<Post>response[0]).title;
+                  this.screenTitle.setTitle(this.title);
                   this.editorContent = (<Post>response[0]).content;
                   this.selected = this.subjects.findIndex(i => i.id === ((<Post>response[0]).subject));
                   this.isUpdate = true;
@@ -83,7 +88,7 @@ export class ArticleEditorComponent implements OnInit {
       });
   }
 
-  sendPost() {
+  sendPost(content) {
     console.log(this.selected);
     const post: Post = {
       title: this.title,
@@ -98,11 +103,22 @@ export class ArticleEditorComponent implements OnInit {
       this.http.post(environment.locke.url + environment.locke.updatePost + this.postId, post)
         .subscribe((response) => {
           console.log(response);
+          this.modal.title = 'ATUALIZADO';
+          this.modal.body = 'Atualizado com sucesso!';
+          this.modalService.open(content).result.then((result) => {
+
+          }, (reason) => { });
         });
     } else {
       this.http.post(environment.locke.url + environment.locke.sendpost, post)
         .subscribe((response) => {
           console.log(response);
+
+          this.modal.title = 'SALVO';
+          this.modal.body = 'Salvo com sucesso!';
+          this.modalService.open(content).result.then((result) => {
+
+          }, (reason) => { });
         });
     }
   }

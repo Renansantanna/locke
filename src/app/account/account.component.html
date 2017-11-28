@@ -2,7 +2,7 @@
   <div class="card" *ngFor="let post of postsList">
     <div class="container-card">
         <avatar [email]="post.subjectValue" size="60" [background]="post.color || '#353b41'" [displayType]="'circle'"></avatar>
-      <p><a href="view/{{post.id}}">{{post.title}} - {{post.subjectValue}}</a></p>
+      <p><a href="editor/{{post.id}}">{{post.title}} - {{post.subjectValue}}</a></p>
     </div>
   </div>
 </div>

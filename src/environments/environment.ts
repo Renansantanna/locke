@@ -12,6 +12,7 @@ export const environment = {
     getAll: '/post/all',
     categories: '/categories',
     getMyPosts: '/user-posts',
-    updatePost: '/update-post/'
+    updatePost: '/update-post/',
+    searchByCategories: '/query',
   }
 };
