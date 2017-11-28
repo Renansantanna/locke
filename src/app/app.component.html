@@ -16,9 +16,6 @@
                     <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/editor">Editor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/articles">Artigos</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</a>
                 </li>
                 <li class="nav-item">

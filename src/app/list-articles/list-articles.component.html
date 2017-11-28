@@ -1,7 +1,7 @@
-<div class="container l-container" style="padding-top: 100px;">
+<div class="container l-container row justify-content-center" style="padding-top: 100px;">
   <div class="card" *ngFor="let post of postsList">
     <div class="container-card">
-        <avatar [email]="post.subjectValue" size="60" background="#353b41" [displayType]="'circle'"></avatar>
+        <avatar [email]="post.subjectValue" size="60" [background]="post.color || '#353b41'" [displayType]="'circle'"></avatar>
       <p><a href="view/{{post.id}}">{{post.title}} - {{post.subjectValue}}</a></p>
     </div>
   </div>

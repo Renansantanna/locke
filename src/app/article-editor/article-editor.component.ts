@@ -90,7 +90,8 @@ export class ArticleEditorComponent implements OnInit {
       subject: this.subjects[this.selected].id,
       subjectValue: this.subjects[this.selected].name,
       content: this.editorContent,
-      uid: this.uid
+      uid: this.uid,
+      color: this.subjects[this.selected].color
     };
 
     if (this.isUpdate) {

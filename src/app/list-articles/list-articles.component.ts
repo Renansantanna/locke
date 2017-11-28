@@ -21,7 +21,8 @@ export class ListArticlesComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         this.postsList = (<Post[]>response);
-      })
+      });
+  
   }
 
   ngOnInit() {

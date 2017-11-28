@@ -7,7 +7,7 @@
       </div>
       <div class="form-group">
         <label for="subject">Assunto/Tema</label>
-        <select [(ngModel)]="selected">
+        <select class="form-control" [(ngModel)]="selected">
           <option *ngFor="let subject of subjects; let i = index" [value]="i">
             {{subject.name}}
           </option>
@@ -16,14 +16,13 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="column">
     <div class="col" id="editor-container">
       <quill-editor id="editor-container" [style]="{background: '#fff'}" [(ngModel)]="editorContent" [options]="editorOptions" (blur)="onEditorBlured($event)"
         (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)"></quill-editor>
     </div>
-  </div>
-  <div class="row" style="position:absolute;bottom: 0px;">
-    <a class="btn btn-primary" (click)="sendPost()">POSTAR</a>
+    <button class="btn btn-locke" (click)="sendPost()" style="margin-top: 20px;     width: 100%;
+    ">POSTAR</button>
   </div>
 </div>
 

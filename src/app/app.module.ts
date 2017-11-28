@@ -15,7 +15,6 @@ import { ViewArticleComponent } from './view-article/view-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { CallbackComponent } from './callback/callback.component';
 import { AuthService } from './auth/auth.service';
-import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { AvatarModule } from "ng2-avatar";
 
@@ -26,7 +25,6 @@ import { AvatarModule } from "ng2-avatar";
     ViewArticleComponent,
     ListArticlesComponent,
     CallbackComponent,
-    HomeComponent,
     AccountComponent
   ],
   imports: [

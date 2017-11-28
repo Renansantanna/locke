@@ -5,14 +5,13 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
 import { ViewArticleComponent } from './view-article/view-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { CallbackComponent } from './callback/callback.component';
-import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { MustBeLoggedInGuard } from './guards/must-be-logged-in/must-be-logged-in.guard';
 
 const routes: Routes = [  
   {
     path: `home`,
-    component: HomeComponent
+    component: ListArticlesComponent
   },
   {
     path: 'editor',
@@ -31,8 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'articles',
-    component: ListArticlesComponent,
-    canActivate: [MustBeLoggedInGuard]
+    component: ListArticlesComponent
   },
   {
     path: 'callback',
