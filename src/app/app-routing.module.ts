@@ -25,8 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'view/:article',
-    component: ViewArticleComponent,
-    canActivate: [MustBeLoggedInGuard]
+    component: ViewArticleComponent//,
+    //canActivate: [MustBeLoggedInGuard]
   },
   {
     path: 'articles',
