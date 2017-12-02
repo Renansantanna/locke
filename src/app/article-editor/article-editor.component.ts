@@ -37,7 +37,10 @@ export class ArticleEditorComponent implements OnInit {
       if (!this.uid) {
         this.router.navigate(['/home']);
       }
-    }
+    } else {
+this.router.navigate(['/home']);
+}
+
   }
 
   onEditorBlured(quill) {
@@ -90,12 +93,16 @@ export class ArticleEditorComponent implements OnInit {
 
   sendPost(content) {
     console.log(this.selected);
+let titleAux = this.title;
+let contentAux = this.editorContent;
+if (titleAux && contentAux){
+if ((<string>titleAux).replace(/\s/g, '').length > 0 && (<string>contentAux).replace(/\s/g, '').length > 0) {
     const post: Post = {
       title: this.title,
       subject: this.subjects[this.selected].id,
       subjectValue: this.subjects[this.selected].name,
       content: this.editorContent,
-      uid: this.uid,
+      uid: `${this.uid}`,
       color: this.subjects[this.selected].color
     };
 
@@ -106,7 +113,6 @@ export class ArticleEditorComponent implements OnInit {
           this.modal.title = 'ATUALIZADO';
           this.modal.body = 'Atualizado com sucesso!';
           this.modalService.open(content).result.then((result) => {
-
           }, (reason) => { });
         });
     } else {
@@ -117,10 +123,29 @@ export class ArticleEditorComponent implements OnInit {
           this.modal.title = 'SALVO';
           this.modal.body = 'Salvo com sucesso!';
           this.modalService.open(content).result.then((result) => {
-
+		this.clear();
           }, (reason) => { });
         });
     }
+} else {
+this.showError(content);
+}
+} else {
+this.showError(content);
+}
   }
+
+clear() {
+this.title = '';
+      this.selected = 0;
+this.editorContent= '';
+}
+
+showError(content) {
+this.modal.title = 'ERRO';
+          this.modal.body = 'Preencha todos os campos corretamente!';
+this.modalService.open(content).result.then((result) => {
+          }, (reason) => { });
+}
 
 }

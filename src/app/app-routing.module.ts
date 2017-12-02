@@ -14,12 +14,12 @@ const routes: Routes = [
     component: ListArticlesComponent
   },
   {
-    path: 'editor',
+    path: 'editor/:article',
     component: ArticleEditorComponent,
     canActivate: [MustBeLoggedInGuard]
   },
   {
-    path: 'editor/:article',
+    path: 'editor',
     component: ArticleEditorComponent,
     canActivate: [MustBeLoggedInGuard]
   },

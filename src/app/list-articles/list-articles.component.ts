@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { Post } from '../shared/models/post.interface';
 import { Http } from '@angular/http';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-list-articles',
@@ -16,6 +17,8 @@ export class ListArticlesComponent implements OnInit {
   postsListHack: Post[];
   subjects: any[];
   selected;
+  query;
+private search$: Subject<string> = new Subject();
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: Http) {
 
@@ -31,21 +34,32 @@ export class ListArticlesComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         this.subjects = response;
-        this.subjects.unshift({ name: 'Selecione' });
+        this.subjects.unshift({ id: 0, name: 'Todos' });
         this.selected = 0;
       });
   }
 
   ngOnInit() {
+  this.search$.debounceTime(500).subscribe((queryText) => {
+    this.handleSearch(queryText);
+  });
   }
 
-  search(index) {
-    this.http.get(environment.locke.url + environment.locke.searchByCategories + '/' + this.selected)
+  handleSearch(query) {
+let url = environment.locke.url + environment.locke.searchByCategories + '/' + this.selected;
+if ((<string>query).replace(/\s/g, '').length > 0) {
+url += '/' + query;
+}
+    this.http.get(url)
     .map((response) => response.json())
     .subscribe((response) => {
       console.log(response);
       this.postsList = (<Post[]>response);
     });
   }
+
+search() {
+this.search$.next(this.query);
+}
 
 }
